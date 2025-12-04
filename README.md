@@ -79,7 +79,7 @@ A: Run `swag init` after updating code comments.
 A: See the Contact section below.
 ## Contact
 
-For questions, issues, or support, please open an issue on GitHub or contact [your.email@example.com](mailto:your.email@example.com).
+For questions, issues, or support, please open an issue on GitHub or contact [jeffhieun@gmail.com](mailto:jeffhieun@gmail.com).
 
 ### Core Features
 - Retrieve current weather data by location
