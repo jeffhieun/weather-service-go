@@ -4,7 +4,6 @@ import (
 	"encoding/json"
 	"fmt"
 	"net/http"
-	"time"
 	"github.com/jeffhieun/weather-service-go/internal/config"
 	"github.com/jeffhieun/weather-service-go/internal/entity"
 	"github.com/jeffhieun/weather-service-go/internal/openmeteo"
@@ -19,6 +18,14 @@ type weatherService struct {
     cfg    *config.Config
 }
 
+type weatherResponse struct {
+	Current struct {
+		Temperature float64 `json:"temperature_2m"`
+		Humidity    int     `json:"relative_humidity_2m"`
+		WeatherCode int     `json:"weather_code"`
+	} `json:"current"`
+}
+
 func NewWeatherService(cfg *config.Config) WeatherService {
 	 return &weatherService{
         client: &http.Client{Timeout: cfg.GetAPITimeout()},
@@ -31,7 +38,7 @@ func (ws *weatherService) GetCurrentWeather(location string) (*entity.CurrentWea
 		return nil, fmt.Errorf("location cannot be empty")
 	}
 	
-	lat, lon, err := openmeteo.GeocodeLocation(location)
+	lat, lon, err := openmeteo.GeocodeLocation(location, ws.client, ws.cfg)
 	if err != nil {
 		return nil, err
 	}

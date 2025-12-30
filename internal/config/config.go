@@ -23,7 +23,7 @@ func LoadConfig() *Config {
         APITimeoutSeconds: getEnvInt("API_TIMEOUT_SECONDS", 10),		
     }
 
-    log.Printf("Config loaded: Port=%s, Timeout=%ds", cfg.Port, 	
+    log.Printf("Config loaded: Port=%s, Timeout=%ds", cfg.Port, cfg.APITimeoutSeconds)
     return cfg
 }
 

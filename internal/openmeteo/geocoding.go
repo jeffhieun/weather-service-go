@@ -17,8 +17,8 @@ type GeocodingResponse struct {
 	} `json:"results"`
 }
 
-func GeocodeLocation(location string) (float64, float64, error) {
-	return 0, 0, fmt.Errorf("location cannot be empty")
+func GeocodeLocation(location string, client *http.Client, cfg *config.Config) (float64, float64, error) {
+	return GeocodeLocationWithClient(location, client, cfg)
 }
 	
 func GeocodeLocationWithClient(location string, client *http.Client, cfg *config.Config) (float64, float64, error) {

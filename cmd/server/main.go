@@ -1,14 +1,10 @@
 package main
 
 import (
-	"context"
 	"encoding/json"
 	"fmt"
 	"log"
 	"net/http"
-	"os"
-	"os/signal"
-	"syscall"
 
 	"github.com/jeffhieun/weather-service-go/internal/config"
     "github.com/jeffhieun/weather-service-go/internal/middleware"
@@ -28,7 +24,10 @@ func main() {
 	mux := http.NewServeMux()
 	mux.HandleFunc("/", homeHandler)
 	mux.HandleFunc("/weather", weatherHandler)
-	log.Fatal(http.ListenAndServe(":9090", nil))
+	
+	handler := middleware.LoggingMiddleware(mux)
+	log.Printf("Starting server on port %s", cfg.Port)
+	log.Fatal(http.ListenAndServe(":"+cfg.Port, handler))
 }
 
 func homeHandler(w http.ResponseWriter, r *http.Request) {

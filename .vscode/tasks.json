@@ -1,0 +1,33 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "Build Weather Service",
+			"type": "shell",
+			"command": "go",
+			"args": [
+				"build",
+				"-o",
+				"weather-server",
+				"./cmd/server"
+			],
+			"problemMatcher": [
+				"$go"
+			],
+			"group": "build"
+		},
+		{
+			"label": "Run Weather Service",
+			"type": "shell",
+			"command": "go",
+			"args": [
+				"run",
+				"./cmd/server"
+			],
+			"problemMatcher": [
+				"$go"
+			],
+			"group": "test"
+		}
+	]
+}
